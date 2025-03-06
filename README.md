@@ -5,8 +5,7 @@ A Model Context Protocol (MCP) server that enables Claude to access external AI 
 ## Features
 
 - Provides a `call_external_model` tool to Claude
-- Allows consulting external AI models like Claude-3-Opus and Gemini Pro
-- Useful for debugging, getting second opinions, or exploring alternative coding approaches
+- Allows Claude to consult external AI models like GPT-o3-mini, Deepseek-R1, and Gemini Pro
 - Configurable model routing via JSON configuration
 
 ## Installation
