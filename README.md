@@ -1,29 +1,44 @@
-# CodingConversationsMCP
+# Coding Conversations MCP Server
 
-An Model Context Protocol (MCP) server that allows Claude to consult external AI models through OpenRouter. This server is designed to handle edge cases where a coding agent might need to get external input, explore alternative approaches, debug complex issues, or get optimal responses.
-
-The goal of CodeConversations is to enable Claude to talk to all its LLM buddies, whenever it wants. With CodeConversations, you're not just talking to Claude-- You're talking to a team.
+A Model Context Protocol (MCP) server that enables Claude to access external AI models for coding assistance through OpenRouter.
 
 ## Features
 
-- Consult external models like o3-mini and Gemini through OpenRouter
-- Simple configuration via JSON
-- Focuses on coding-related tasks
-- Exposes a straightforward MCP tool interface
+- Provides a `call_external_model` tool to Claude
+- Allows consulting external AI models like Claude-3-Opus and Gemini Pro
+- Useful for debugging, getting second opinions, or exploring alternative coding approaches
+- Configurable model routing via JSON configuration
 
 ## Installation
 
-Clone the repository and install dependencies:
-
-```bash
-git clone https://github.com/yourusername/coding-conversations-mcp.git
+1. Clone the repository:
+```
+git clone https://github.com/your-username/coding-conversations-mcp.git
 cd coding-conversations-mcp
+```
+
+2. Install dependencies:
+```
 npm install
+```
+
+3. Create your configuration file:
+```
+cp src/config/models-config.template.json src/config/models-config.json
+```
+
+4. Edit `src/config/models-config.json` and add your OpenRouter API key
+
+5. Build the project:
+```
+npm run build
 ```
 
 ## Configuration
 
-Edit the `src/config/models-config.json` file to set up your models:
+### Setting up models-config.json
+
+Edit the `src/config/models-config.json` file to configure which models are available:
 
 ```json
 {
@@ -31,12 +46,12 @@ Edit the `src/config/models-config.json` file to set up your models:
     "o3-mini": {
       "endpoint": "https://openrouter.ai/api/v1/chat/completions",
       "modelId": "anthropic/claude-3-opus-20240229",
-      "token": "YOUR_OPENROUTER_API_KEY"
+      "token": "YOUR_OPENROUTER_API_KEY_HERE"
     },
     "gemini": {
       "endpoint": "https://openrouter.ai/api/v1/chat/completions",
       "modelId": "google/gemini-pro",
-      "token": "YOUR_OPENROUTER_API_KEY"
+      "token": "YOUR_OPENROUTER_API_KEY_HERE"
     }
   },
   "routing": {
@@ -45,35 +60,21 @@ Edit the `src/config/models-config.json` file to set up your models:
 }
 ```
 
-Replace `YOUR_OPENROUTER_API_KEY` with your actual OpenRouter API key.
+### Configuring with Claude
 
-## Build and Run
+#### For Claude VSCode Extension
 
-Build the TypeScript code:
+Edit the settings file at:
+`~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json`
 
-```bash
-npm run build
-```
-
-Run the server:
-
-```bash
-npm start
-```
-
-## Integrating with Cline
-
-To use this server with Cline, add it to your MCP settings file (`cline_mcp_settings.json`):
+Add your MCP server:
 
 ```json
 {
   "mcpServers": {
     "coding-conversations": {
       "command": "node",
-      "args": ["/path/to/coding-conversations-mcp/dist/index.js"],
-      "env": {
-        "NODE_ENV": "production"
-      },
+      "args": ["/path/to/your/coding-conversations-mcp/dist/index.js"],
       "disabled": false,
       "autoApprove": []
     }
@@ -81,18 +82,29 @@ To use this server with Cline, add it to your MCP settings file (`cline_mcp_sett
 }
 ```
 
+#### For Claude Desktop App
+
+Edit the settings file at:
+`~/Library/Application Support/Claude/claude_desktop_config.json`
+
+Add your MCP server similar to the VSCode example above.
+
 ## Usage
 
-Once integrated, Claude can use the `call_external_model` tool to query external models through OpenRouter:
+Once configured, ask Claude to use the `call_external_model` tool to consult an external model:
 
-```typescript
-// Example call
-{
-  "model": "o3-mini", // Optional, defaults to o3-mini if not specified
-  "message": "What's a better way to implement this React useEffect hook to avoid infinite re-renders?",
-  "context": "I'm debugging a React application" // Optional
-}
 ```
+Can you use the call_external_model tool to ask Gemini about the best way to implement promise.all with a concurrency limit in JavaScript?
+```
+
+Claude will use the tool to communicate with the specified model through OpenRouter and present the response.
+
+## Development
+
+- `src/index.ts` - Main entry point
+- `src/services/model-service.ts` - Service handling communication with OpenRouter
+- `src/types.ts` - TypeScript types
+- `src/config/models-config.json` - Configuration (not version controlled)
 
 ## License
 
