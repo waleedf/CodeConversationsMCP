@@ -1,0 +1,17 @@
+{
+  "models": {
+    "o3-mini": {
+      "endpoint": "https://openrouter.ai/api/v1/chat/completions",
+      "modelId": "anthropic/claude-3-opus-20240229",
+      "token": "PLACEHOLDER_O3MINI_TOKEN"
+    },
+    "gemini": {
+      "endpoint": "https://openrouter.ai/api/v1/chat/completions",
+      "modelId": "google/gemini-pro",
+      "token": "PLACEHOLDER_GEMINI_TOKEN"
+    }
+  },
+  "routing": {
+    "default_model": "o3-mini"
+  }
+}
