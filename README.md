@@ -44,7 +44,12 @@ Edit the `src/config/models-config.json` file to configure which models are avai
   "models": {
     "o3-mini": {
       "endpoint": "https://openrouter.ai/api/v1/chat/completions",
-      "modelId": "anthropic/claude-3-opus-20240229",
+      "modelId": "openai/gpt-o3-mini",
+      "token": "YOUR_OPENROUTER_API_KEY_HERE"
+    },
+    "deepseek-r1": {
+      "endpoint": "https://openrouter.ai/api/v1/chat/completions",
+      "modelId": "deepseek-ai/deepseek-r1",
       "token": "YOUR_OPENROUTER_API_KEY_HERE"
     },
     "gemini": {
@@ -52,9 +57,6 @@ Edit the `src/config/models-config.json` file to configure which models are avai
       "modelId": "google/gemini-pro",
       "token": "YOUR_OPENROUTER_API_KEY_HERE"
     }
-  },
-  "routing": {
-    "default_model": "o3-mini"
   }
 }
 ```
