@@ -49,26 +49,26 @@ class CodingConversationsMCP {
       tools: [
         {
           name: 'call_external_model',
-          description: 'Call an external AI model for code-related tasks and consulting',
+          description: 'When you hit a debugging roadblock or need a second opinion on code issues, consult external AI models. Use this for complex error debugging, optimization advice, or exploring alternative approaches to coding problems.',
           inputSchema: {
             type: 'object',
             properties: {
               model: {
                 type: 'string',
-                description: 'Target model name (e.g., "o3-mini", "gemini")',
+                description: 'Target model name (e.g., "nano", "mini", "full"). "nano" is fastest and most cost-effective for simple tasks, "mini" balances speed and capability for most coding tasks, and "full" is best for complex problems requiring deep analysis.',
               },
               message: {
                 type: 'string',
-                description: 'The message or query to send to the external model',
+                description: 'The specific debug error, coding issue, or question you need help with. Be specific about your debugging challenge or the alternative approach you seek.',
               },
               context: {
                 type: 'string',
-                description: 'Optional additional context or system message',
+                description: 'Additional context about your debugging scenario, such as relevant code snippets, error messages, or the programming language/framework you\'re using.',
               },
             },
             required: ['message'],
           },
-        },
+        }
       ],
     }));
 
@@ -105,7 +105,7 @@ class CodingConversationsMCP {
           params.message,
           params.context
         );
-
+        
         return {
           content: [
             {

@@ -7,9 +7,16 @@ export interface ModelConfig {
   endpoint: string;
   modelId: string;
   token: string;
+  metadata?: {
+    description?: string;
+    useCase?: string;
+    strengths?: string[];
+    costTier?: 'low' | 'medium' | 'high';
+  };
 }
 
 export interface ModelsConfig {
+  openrouterApiKey: string;
   models: {
     [key: string]: ModelConfig;
   };
@@ -26,10 +33,12 @@ export interface CallExternalModelInput {
 }
 
 export interface CallExternalModelOutput {
-  response: string;
+  text: string;
   modelUsed: string;
   usage?: {
-    tokens?: number;
+    prompt_tokens?: number;
+    completion_tokens?: number;
+    total_tokens?: number;
     cost?: string;
   };
 }

@@ -1,17 +1,40 @@
 {
   "models": {
-    "o3-mini": {
+    "nano": {
       "endpoint": "https://openrouter.ai/api/v1/chat/completions",
-      "modelId": "anthropic/claude-3-opus-20240229",
-      "token": "PLACEHOLDER_O3MINI_TOKEN"
+      "modelId": "openai/gpt-4.1-nano",
+      "token": "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",
+      "metadata": {
+        "description": "GPT-4.1 Nano - Smallest and fastest GPT-4.1 variant",
+        "useCase": "Quick code reviews, simple debugging tasks, and basic coding assistance",
+        "strengths": ["Fast response time", "Cost-effective", "Good for simple tasks"],
+        "costTier": "low"
+      }
     },
-    "gemini": {
+    "mini": {
       "endpoint": "https://openrouter.ai/api/v1/chat/completions",
-      "modelId": "google/gemini-pro",
-      "token": "PLACEHOLDER_GEMINI_TOKEN"
+      "modelId": "openai/gpt-4.1-mini",
+      "token": "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",
+      "metadata": {
+        "description": "GPT-4.1 Mini - Mid-sized GPT-4.1 variant with good balance of speed and capability",
+        "useCase": "Complex debugging, code optimization, and architectural suggestions",
+        "strengths": ["Good balance of speed and capability", "Strong coding knowledge", "Detailed explanations"],
+        "costTier": "medium"
+      }
+    },
+    "full": {
+      "endpoint": "https://openrouter.ai/api/v1/chat/completions",
+      "modelId": "openai/gpt-4.1",
+      "token": "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",
+      "metadata": {
+        "description": "GPT-4.1 - Full-sized GPT-4.1 model with maximum capability",
+        "useCase": "Complex system design, advanced debugging, and in-depth code analysis",
+        "strengths": ["Most comprehensive understanding", "Best for complex problems", "Detailed and nuanced responses"],
+        "costTier": "high"
+      }
     }
   },
   "routing": {
-    "default_model": "o3-mini"
+    "default_model": "mini"
   }
 }
